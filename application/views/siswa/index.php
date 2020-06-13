@@ -1,77 +1,50 @@
 <div class="row">
 
-    <div class="col-md-12">
-        <form>
-            <div class="row form-group">
+    <div class="col-md-12">        
+        <div class="row form-group">
+            <form id="uploadRefund" action="<?php echo base_url('siswa/upload_post') ?>" method="POST" enctype="multipart/form-data">
                 <div class="col-md-10">
-                    <input type="file" class="form-control" placeholder="First name">
+                    <input type="file" class="form-control" name="cms" accept=".xls,.xlsx" required>
                 </div>
                 <div class="col-md-2">
                     <button class="btn btn-primary form-control">upload file <i class="fa fa-send"></i></button>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <hr>
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped table-bordered table-hover" id="dataTable">
                 <thead>
                     <tr>
-                        <th colspan="6" class="text-center">Data Siswa</th>
-                    </tr>
-                    <tr>
-                        <th>No</th>
-                        <th>NIP</th>
-                        <th>Nama Lengkap</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Delivery On </th>
+                        <th>NISN</th>
+                        <th>Nama Siswa</th>
+                        <th>JK</th>
+                        <th>TTL</th>
+                        <th>NIK</th>
+                        <th>Agama</th>
+                        <th>Kelas</th>
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr>
-                        <td>1</td>
-                        <td>01/22/2015 </td>
-                        <td>
-                            <label class="label label-info">300 USD </label>
-                        </td>
-                        <td>
-                            <label class="label label-success">Delivered</label></td>
-                        <td>01/25/2015</td>
-                        <td> <a href="#"  class="btn btn-xs btn-danger"  >View</a> </td>
-                    </tr>
-                    <tr>
-                        <td># 15091</td>
-                        <td>12/12/2014 </td>
-                        <td>
-                            <label class="label label-danger">7000 USD </label>
-                        </td>
-                        <td>
-                            <label class="label label-warning">Shipped</label></td>
-                        <td>N/A</td>
-                        <td> <a href="#"  class="btn btn-xs btn-success"  >View</a> </td>
-                    </tr>
-                    <tr>
-                        <td># 11291</td>
-                        <td>12/03/2014 </td>
-                        <td>
-                            <label class="label label-warning">7000 USD </label>
-                        </td>
-                        <td>
-                            <label class="label label-success">Delivered</label></td>
-                        <td>01/23/2015</td>
-                        <td> <a href="#"  class="btn btn-xs btn-primary"  >View</a> </td>
-                    </tr>
-                    <tr>
-                        <td># 1808</td>
-                        <td>11/10/2014 </td>
-                        <td>
-                            <label class="label label-success">2000 USD </label>
-                        </td>
-                        <td>
-                            <label class="label label-info">Returned</label></td>
-                        <td>N/A</td>
-                        <td> <a href="#"  class="btn btn-xs btn-danger"  >View</a> </td>
-                    </tr>
+                    <?php
+                    foreach ($data_siswa as $siswa){
+                        if ($siswa->nisn == ''){
+                            $red = "class='bg-danger'";
+                            $siswa->nisn = "DATA BELUM LENGKAP";
+                        } else {                            
+                            $red = "";
+                        }
+                        echo "<tr>
+                                <td $red>$siswa->nisn</td>                                    
+                                <td $red>$siswa->nama_siswa</td>
+                                <td $red>$siswa->jk</td>
+                                <td $red>$siswa->tempat_lahir, $siswa->tanggal_lahir</td>
+                                <td $red>$siswa->nik</td>
+                                <td $red>$siswa->agama</td>
+                                <td $red>$siswa->rombel_saat_ini</td>
+                              </tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
